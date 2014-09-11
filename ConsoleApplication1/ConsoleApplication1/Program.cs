@@ -26,10 +26,10 @@ namespace ConsoleApplication1
                 
                 //läs in värden
                 
-                Console.Write("Ange totalsumma:");
+                Console.Write("Ange totalsumma     : ");
                 total = double.Parse(Console.ReadLine());
 
-                Console.Write("Ange erhållet belopp:");
+                Console.Write("Ange erhållet belopp: ");
                 belopp = int.Parse(Console.ReadLine());
                 break;
                 }
@@ -53,13 +53,13 @@ namespace ConsoleApplication1
 
                 Console.WriteLine(""); //Blank rad
                 Console.WriteLine("KVITTO");
-                Console.WriteLine("---------------------------------------------");
-                Console.WriteLine("Totalt                : {0}", total);
-                Console.WriteLine("Öresavrundning        : {0:f2}", oren);               
-                Console.WriteLine("Att betala            : {0:f0}", total);
-                Console.WriteLine("Kontant               : {0:f0}", belopp);
-                Console.WriteLine("Tillbaka              : {0:f0}", tillbaka);
-                Console.WriteLine("---------------------------------------------");
+                Console.WriteLine("------------------------------------");
+                Console.WriteLine(string.Format("Totalt                : {0,12:c}", total));
+                Console.WriteLine(string.Format("Öresavrundning        : {0,12:c2}", oren));               
+                Console.WriteLine(string.Format("Att betala            : {0,12:c0}", total));
+                Console.WriteLine(string.Format("Kontant               : {0,12:c0}", belopp));
+                Console.WriteLine(string.Format("Tillbaka              : {0,12:c0}", tillbaka));
+                Console.WriteLine("------------------------------------");
                 Console.WriteLine(""); //Blank rad
 
                 //Lappar/kronor tillbaka
