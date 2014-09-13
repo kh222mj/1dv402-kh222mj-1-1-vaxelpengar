@@ -36,7 +36,7 @@ namespace ConsoleApplication1
                 
                 catch
                 {
-                    Console.WriteLine("FEL");
+                    Console.WriteLine("FEL! Skriv in ett tal med eller utan decimaler.");
                 }
 
             }
