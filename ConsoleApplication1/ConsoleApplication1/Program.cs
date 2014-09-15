@@ -33,10 +33,12 @@ namespace ConsoleApplication1
                 belopp = int.Parse(Console.ReadLine());
                 break;
                 }
-                
+
                 catch
                 {
+                    Console.BackgroundColor = ConsoleColor.Red;
                     Console.WriteLine("FEL! Skriv in ett tal med eller utan decimaler.");
+                    Console.BackgroundColor = ConsoleColor.Black;
                 }
 
             }
@@ -51,7 +53,7 @@ namespace ConsoleApplication1
                 
                 //Presentera
 
-                Console.WriteLine(""); //Blank rad
+                Console.WriteLine(); //Blank rad
                 Console.WriteLine("KVITTO");
                 Console.WriteLine("------------------------------------");
                 Console.WriteLine(string.Format("Totalt                : {0,12:c}", total));
@@ -60,7 +62,7 @@ namespace ConsoleApplication1
                 Console.WriteLine(string.Format("Kontant               : {0,12:c0}", belopp));
                 Console.WriteLine(string.Format("Tillbaka              : {0,12:c0}", tillbaka));
                 Console.WriteLine("------------------------------------");
-                Console.WriteLine(""); //Blank rad
+                Console.WriteLine(); //Blank rad
 
                 //Lappar/kronor tillbaka
 
@@ -74,12 +76,6 @@ namespace ConsoleApplication1
                 tillbaka = tillbaka % 5;
                 tillbaka = tillbaka / 1;
                 Console.WriteLine("1-kronor              : {0:f0}" ,tillbaka);
-                
-
-                
-
-
-            
             
         }
     }
