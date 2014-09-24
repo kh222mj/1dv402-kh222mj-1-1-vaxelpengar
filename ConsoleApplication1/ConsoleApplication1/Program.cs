@@ -10,73 +10,125 @@ namespace ConsoleApplication1
         static void Main(string[] args)
         {
 
-                //deklaration av variablar
-                
-                double total = 0;
-                int belopp = 0;
-                double tillbaka = 0;
-                int avrundare = 0;
-                double oren = 0;
-            
+            //deklaration av variablar
+
+            double total = 0;
+            int belopp = 0;
+            int tillbaka = 0;
+
             while (true)
             {
-                
+
                 try
                 {
-                
-                //läs in värden
-                
-                Console.Write("Ange totalsumma     : ");
-                total = double.Parse(Console.ReadLine());
+                    //läs in värden
 
-                Console.Write("Ange erhållet belopp: ");
-                belopp = int.Parse(Console.ReadLine());
-                break;
+                    Console.Write("Ange totalsumma      : ");
+                    total = double.Parse(Console.ReadLine());
+                    break;
                 }
 
+                //Fånga fel beroende på vad felet är
                 catch
                 {
                     Console.BackgroundColor = ConsoleColor.Red;
-                    Console.WriteLine("FEL! Skriv in ett tal med eller utan decimaler.");
+                    Console.WriteLine("FEL! Skriv in ett tal vid totalsumma och ett heltal vid erhållet belopp");
                     Console.BackgroundColor = ConsoleColor.Black;
                 }
 
             }
 
-                //Beräkna
+            //Avrundar total
+            int avrundare = Convert.ToInt32(total);  //Math.Round
 
-                tillbaka = belopp - total;
+            while (true)
+            {
 
-                //Avrundar total
-                avrundare = Convert.ToInt32(total);
-                oren = total - avrundare;
-                
-                //Presentera
+                try
+                {
+                    Console.Write("Ange erhållet belopp : ");
+                    belopp = int.Parse(Console.ReadLine());
+                    
+                    if (belopp < avrundare)
+                    {
+                        throw new IndexOutOfRangeException();
+                    }
+                    break;
+                }
+                //Fånga fel beroende på vad felet är
+                catch
+                {
+                    Console.BackgroundColor = ConsoleColor.Red;
+                    Console.WriteLine("FEL! Erhållet belopp är mindre än totalsumman");
+                    Console.BackgroundColor = ConsoleColor.Black;
+                }
+            }
 
-                Console.WriteLine(); //Blank rad
-                Console.WriteLine("KVITTO");
-                Console.WriteLine("------------------------------------");
-                Console.WriteLine(string.Format("Totalt                : {0,12:c}", total));
-                Console.WriteLine(string.Format("Öresavrundning        : {0,12:c2}", oren));               
-                Console.WriteLine(string.Format("Att betala            : {0,12:c0}", total));
-                Console.WriteLine(string.Format("Kontant               : {0,12:c0}", belopp));
-                Console.WriteLine(string.Format("Tillbaka              : {0,12:c0}", tillbaka));
-                Console.WriteLine("------------------------------------");
-                Console.WriteLine(); //Blank rad
+            double oren = avrundare - total;
 
-                //Lappar/kronor tillbaka
+            //Beräkna
+            tillbaka = belopp - avrundare;
 
-                Console.WriteLine("500-lappar            : " + (tillbaka - tillbaka % 500) / 500);
-                tillbaka = tillbaka % 500;
-                Console.WriteLine("100-lappar            : " + (tillbaka - tillbaka % 100) / 100);
-                tillbaka = tillbaka % 100;
-                Console.WriteLine("20-lappar             : " + (tillbaka - tillbaka % 20) / 20);
-                tillbaka = tillbaka % 20;
-                Console.WriteLine("5-kronor              : " + (tillbaka - tillbaka % 5) / 5);
-                tillbaka = tillbaka % 5;
-                tillbaka = tillbaka / 1;
-                Console.WriteLine("1-kronor              : {0:f0}" ,tillbaka);
+            //Presentera
+            Console.WriteLine(); //Blank rad
+            Console.WriteLine("KVITTO");
+            Console.WriteLine("------------------------------------");
+            Console.WriteLine(string.Format("Totalt                : {0,12:c}", total));
+            Console.WriteLine(string.Format("Öresavrundning        : {0,12:c2}", oren));
+            Console.WriteLine(string.Format("Att betala            : {0,12:c0}", avrundare));
+            Console.WriteLine(string.Format("Kontant               : {0,12:c0}", belopp));
+            Console.WriteLine(string.Format("Tillbaka              : {0,12:c0}", tillbaka));
+            Console.WriteLine("------------------------------------");
+            Console.WriteLine(); //Blank rad
+
+            //Lappar/kronor tillbaka
+            int count = tillbaka / 500;            
+            if (count > 0)
+            {
+                Console.WriteLine(string.Format("500-lappar            : {0,1}", count));
+                tillbaka %= 500;
+            }
             
+            count = tillbaka / 100;
+            if (count > 0)
+            {
+                Console.WriteLine(string.Format("100-lappar            : {0,1}", count));
+                tillbaka %= 100;
+            }
+            
+            count = tillbaka / 50;
+            if (count > 0)
+            {
+                Console.WriteLine(string.Format("50-lappar             : {0,1}", count));
+                tillbaka %= 50;
+            }
+            
+            count = tillbaka / 20;
+            if (count > 0)
+            {
+                Console.WriteLine(string.Format("20-lappar             : {0,1}", count));
+                tillbaka %= 20;
+            }
+            
+            count = tillbaka / 10;
+            if (count > 0)
+            {
+                Console.WriteLine(string.Format("10-kronor             : {0,1}", count));
+                tillbaka %= 10;
+            }
+            
+            count = tillbaka / 5;
+            if (count > 0)
+            {
+                Console.WriteLine(string.Format("5-kronor              : {0,1}", count));
+                tillbaka %= 5;
+            }
+
+            count = tillbaka;
+            if (count > 0)
+            {
+                Console.WriteLine(string.Format("1-kronor              : {0,1}", count));
+            }
         }
     }
 }
